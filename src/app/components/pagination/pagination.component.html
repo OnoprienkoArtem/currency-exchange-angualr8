@@ -1,0 +1,27 @@
+<div class="pagination" *ngIf="totalPages > 0">
+  <div class="numbers">
+    <button
+      class="link"
+      (click)="onPrev()"
+      [disabled]="page === 1"
+      [ngClass]="{ disabled: page === 1 }"
+    >
+      <img src="assets/icon/Arrow_Back.svg" alt="" />
+    </button>
+    <button
+      *ngFor="let pageNum of getPages()"
+      (click)="onPage(pageNum)"
+      [ngClass]="{ active: pageNum === page }"
+    >
+      {{ pageNum }}
+    </button>
+    <button
+      class="link"
+      (click)="onNext()"
+      [disabled]="page === totalPages"
+      [ngClass]="{ disabled: page === totalPages }"
+    >
+      <img src="assets/icon/Arrow_Forward.svg" alt="" />
+    </button>
+  </div>
+</div>
