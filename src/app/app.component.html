@@ -37,9 +37,9 @@
           </div>
         </div>
 
-        <div class="table">
+        <div class="table" [ngClass]="{ 'empty-container': !currentData.length }">
           <ng-container *ngIf="currentData.length > 0; else empty">
-            <ul class="table-header" (click)="sort($event)">
+            <ul class="table-header" (click)="isActiveHeader($event)">
               <li
                 (click)="sortCurrencyAsk('currencies')"
                 class="ask"

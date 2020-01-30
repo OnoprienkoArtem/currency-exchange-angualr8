@@ -12,8 +12,6 @@ export class AppComponent implements OnInit {
   public from = 0;
   public to = 10;
 
-  public data;
-
   public sortIsActive = false;
   public firstSort = true;
 
@@ -36,6 +34,7 @@ export class AppComponent implements OnInit {
   public sortOrganizationSwitcher = true;
   public sortPhoneSwitcher = true;
 
+  public data;
   public currentData = [];
   public changeData;
 
@@ -71,6 +70,22 @@ export class AppComponent implements OnInit {
     }
   }
 
+  private getKey(object, current) {
+    for (const key in object) {
+      if (object[key] === current) {
+        return key;
+      }
+    }
+  }
+
+  public getRegionsName(id) {
+    for (const key in this.regions) {
+      if (key === id) {
+        return this.regions[key];
+      }
+    }
+  }
+
   public selectCurrency(e) {
     this.currentCurrency = e.target.value;
     this.changeData = this.data.filter(
@@ -101,14 +116,6 @@ export class AppComponent implements OnInit {
     );
     this.sortIsActive = false;
     this.filteringData();
-  }
-
-  private getKey(object, current) {
-    for (const key in object) {
-      if (object[key] === current) {
-        return key;
-      }
-    }
   }
 
   private filteringData() {
@@ -155,7 +162,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  sort(e) {
+  isActiveHeader(e) {
     this.sortIsActive = e.target.innerText;
   }
 
@@ -260,14 +267,6 @@ export class AppComponent implements OnInit {
       this.currentData = this.changeData.reverse();
     }
     this.filteringData();
-  }
-
-  public getRegionsName(id) {
-    for (const key in this.regions) {
-      if (key === id) {
-        return this.regions[key];
-      }
-    }
   }
 
   public goToPage(page: number): void {
