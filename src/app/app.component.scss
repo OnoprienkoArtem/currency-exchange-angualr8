@@ -4,6 +4,7 @@
   display: flex;
   height: 100%;
   align-items: center;
+  justify-content: space-between;
 }
 
 h1,
@@ -30,6 +31,11 @@ h6 {
 
     h1 {
       font-size: 20px;
+    }
+
+    .date {
+      font-size: 14px;
+      font-weight: 700;
     }
   }
 
@@ -83,7 +89,7 @@ h6 {
         li {
           font-weight: bold;
           cursor: pointer;
-          
+
           img {
             width: 10px;
           }
@@ -126,11 +132,11 @@ h6 {
 
   footer {
     height: 5%;
-    background: #00b729ab;
-
-    div {
-      display: flex;
-      justify-content: flex-end;
-    }
+    background: #00b729ab;  
+    a {
+      font-size: 12px;
+      font-weight: 300;
+      font-style: italic;
+    }  
   }
 }

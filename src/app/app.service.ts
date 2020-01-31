@@ -10,6 +10,6 @@ export class AppService {
   // http://resources.finance.ua/ru/public/currency-cash.json
 
   getData() {
-    return this.http.get(`assets/data.json`);
+    return this.http.get(`http://localhost:3000/ru/public/currency-cash.json`);
   }
 }

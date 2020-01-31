@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { AppService } from './app.service';
+import { Component, OnInit } from "@angular/core";
+import { AppService } from "./app.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
   public page = 1;
@@ -15,17 +15,17 @@ export class AppComponent implements OnInit {
   public regions: Array<string>;
   public regionID: string;
   public regionsList: Array<string>;
-  public currentRegion = 'все';
+  public currentRegion = "все";
 
-  public currenciesList = ['USD', 'EUR'];
-  public currentCurrency = 'USD';
+  public currenciesList = ["USD", "EUR"];
+  public currentCurrency = "USD";
 
   public organizations: object;
   public organizationID: string;
   public organizationsList: any;
-  public currentOrganization = 'все';
+  public currentOrganization = "все";
 
-  public sortIsActive = '';
+  public sortIsActive = "";
   public sortCurrencyAskSwitcher = true;
   public sortCurrencyBidSwitcher = true;
   public sortRegionSwitcher = true;
@@ -36,11 +36,17 @@ export class AppComponent implements OnInit {
   public currentData = [];
   public changeData: Array<any>;
 
+  public date: any;
+
   constructor(public appService: AppService) {}
 
   ngOnInit() {
     this.appService.getData().subscribe((data: any) => {
       this.data = data.organizations;
+
+      const objDate = new Date(data.date);
+      this.date = `${objDate.getDate()}.${objDate.getMonth() +
+        1}.${objDate.getFullYear()} - ${objDate.getHours()}:${objDate.getMinutes()}`;
 
       this.currentData = this.data
         .filter(item => this.currentCurrency in item.currencies)
@@ -81,7 +87,7 @@ export class AppComponent implements OnInit {
     this.changeData = this.data.filter(
       item => this.currentCurrency in item.currencies
     );
-    this.sortIsActive = '';
+    this.sortIsActive = "";
     this.filteringData();
   }
 
@@ -91,7 +97,7 @@ export class AppComponent implements OnInit {
     this.to = 10;
     this.currentRegion = e.target.value;
     this.regionID = this.getKey(this.regions, this.currentRegion);
-    this.sortIsActive = '';
+    this.sortIsActive = "";
     this.filteringData();
   }
 
@@ -104,19 +110,19 @@ export class AppComponent implements OnInit {
       this.organizations,
       this.currentOrganization
     );
-    this.sortIsActive = '';
+    this.sortIsActive = "";
     this.filteringData();
   }
 
   private filteringData(): any {
-    if (this.currentRegion === 'все' && this.currentOrganization === 'все') {
+    if (this.currentRegion === "все" && this.currentOrganization === "все") {
       this.currentData = this.changeData
         .filter(item => this.currentCurrency in item.currencies)
         .slice(this.from, this.to);
       this.totalResult = Math.ceil(this.data.length / 10);
     } else if (
-      this.currentRegion === 'все' &&
-      this.currentOrganization !== 'все'
+      this.currentRegion === "все" &&
+      this.currentOrganization !== "все"
     ) {
       this.currentData = this.changeData.filter(item => {
         return (
@@ -127,8 +133,8 @@ export class AppComponent implements OnInit {
       this.totalResult = Math.ceil(this.currentData.length / 10);
       this.currentData = this.currentData.slice(this.from, this.to);
     } else if (
-      this.currentRegion !== 'все' &&
-      this.currentOrganization === 'все'
+      this.currentRegion !== "все" &&
+      this.currentOrganization === "все"
     ) {
       this.currentData = this.changeData.filter(item => {
         return (
