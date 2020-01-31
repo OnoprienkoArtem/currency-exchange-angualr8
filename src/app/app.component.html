@@ -37,43 +37,111 @@
           </div>
         </div>
 
-        <div class="table" [ngClass]="{ 'empty-container': !currentData.length }">
+        <div
+          class="table"
+          [ngClass]="{ 'empty-container': !currentData.length }"
+        >
           <ng-container *ngIf="currentData.length > 0; else empty">
-            <ul class="table-header" (click)="isActiveHeader($event)">
+            <ul class="table-header">
               <li
-                (click)="sortCurrencyAsk('currencies')"
+                (click)="sortCurrencyAsk('currencies', $event)"
                 class="ask"
-                [ngClass]="{ active: sortIsActive === 'Продажа' }"
+                title="ask"
+                [ngClass]="{ active: sortIsActive === 'ask' }"
               >
                 Продажа
+                <span *ngIf="sortIsActive === 'ask'">
+                  <img
+                    *ngIf="!sortCurrencyAskSwitcher"
+                    src="assets/icon/Arrow_Download.svg"
+                    alt=""
+                  />
+                  <img
+                    *ngIf="sortCurrencyAskSwitcher"
+                    src="assets/icon/Arrow_Upward.svg"
+                    alt=""
+                  />
+                </span>
               </li>
               <li
-                (click)="sortCurrencyBid('currencies')"
+                (click)="sortCurrencyBid('currencies', $event)"
                 class="bid"
-                [ngClass]="{ active: sortIsActive === 'Покупка' }"
+                title="bid"
+                [ngClass]="{ active: sortIsActive === 'bid' }"
               >
                 Покупка
+                <span *ngIf="sortIsActive === 'bid'">
+                  <img
+                    *ngIf="!sortCurrencyBidSwitcher"
+                    src="assets/icon/Arrow_Download.svg"
+                    alt=""
+                  />
+                  <img
+                    *ngIf="sortCurrencyBidSwitcher"
+                    src="assets/icon/Arrow_Upward.svg"
+                    alt=""
+                  />
+                </span>
               </li>
               <li
-                (click)="sortRegions('regionId')"
+                (click)="sortRegions('regionId', $event)"
                 class="city region"
-                [ngClass]="{ active: sortIsActive === 'Город' }"
+                title="region"
+                [ngClass]="{ active: sortIsActive === 'region' }"
               >
                 Город
+                <span *ngIf="sortIsActive === 'region'">
+                  <img
+                    *ngIf="!sortRegionSwitcher"
+                    src="assets/icon/Arrow_Download.svg"
+                    alt=""
+                  />
+                  <img
+                    *ngIf="sortRegionSwitcher"
+                    src="assets/icon/Arrow_Upward.svg"
+                    alt=""
+                  />
+                </span>
               </li>
               <li
-                (click)="sortOrganization('title')"
+                (click)="sortOrganization('title', $event)"
                 class="title organization"
-                [ngClass]="{ active: sortIsActive === 'Организация' }"
+                title="organization"
+                [ngClass]="{ active: sortIsActive === 'organization' }"
               >
                 Организация
+                <span *ngIf="sortIsActive === 'organization'">
+                  <img
+                    *ngIf="!sortOrganizationSwitcher"
+                    src="assets/icon/Arrow_Download.svg"
+                    alt=""
+                  />
+                  <img
+                    *ngIf="sortOrganizationSwitcher"
+                    src="assets/icon/Arrow_Upward.svg"
+                    alt=""
+                  />
+                </span>
               </li>
               <li
-                (click)="sortPhone('phone')"
+                (click)="sortPhone('phone', $event)"
                 class="phone"
-                [ngClass]="{ active: sortIsActive === 'Телефон' }"
+                title="phone"
+                [ngClass]="{ active: sortIsActive === 'phone' }"
               >
                 Телефон
+                <span *ngIf="sortIsActive === 'phone'">
+                  <img
+                    *ngIf="!sortPhoneSwitcher"
+                    src="assets/icon/Arrow_Download.svg"
+                    alt=""
+                  />
+                  <img
+                    *ngIf="sortPhoneSwitcher"
+                    src="assets/icon/Arrow_Upward.svg"
+                    alt=""
+                  />
+                </span>
               </li>
             </ul>
             <div *ngFor="let item of currentData" class="table-row">

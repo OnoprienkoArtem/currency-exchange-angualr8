@@ -12,31 +12,29 @@ export class AppComponent implements OnInit {
   public from = 0;
   public to = 10;
 
-  public sortIsActive = false;
-  public firstSort = true;
-
   public regions: Array<string>;
-  public regionID;
+  public regionID: string;
   public regionsList: Array<string>;
   public currentRegion = 'все';
 
   public currenciesList = ['USD', 'EUR'];
   public currentCurrency = 'USD';
 
-  public organizations;
-  public organizationID;
+  public organizations: object;
+  public organizationID: string;
   public organizationsList: any;
   public currentOrganization = 'все';
 
+  public sortIsActive = '';
   public sortCurrencyAskSwitcher = true;
   public sortCurrencyBidSwitcher = true;
   public sortRegionSwitcher = true;
   public sortOrganizationSwitcher = true;
   public sortPhoneSwitcher = true;
 
-  public data;
+  public data: any;
   public currentData = [];
-  public changeData;
+  public changeData: Array<any>;
 
   constructor(public appService: AppService) {}
 
@@ -62,7 +60,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  public currenciesValue(value) {
+  public currenciesValue(value): object {
     for (const key in value) {
       if (key === this.currentCurrency) {
         return value[key];
@@ -70,7 +68,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  private getKey(object, current) {
+  private getKey(object, current): string {
     for (const key in object) {
       if (object[key] === current) {
         return key;
@@ -78,34 +76,26 @@ export class AppComponent implements OnInit {
     }
   }
 
-  public getRegionsName(id) {
-    for (const key in this.regions) {
-      if (key === id) {
-        return this.regions[key];
-      }
-    }
-  }
-
-  public selectCurrency(e) {
+  public selectCurrency(e): void {
     this.currentCurrency = e.target.value;
     this.changeData = this.data.filter(
       item => this.currentCurrency in item.currencies
     );
-    this.sortIsActive = false;
+    this.sortIsActive = '';
     this.filteringData();
   }
 
-  public selectRegion(e) {
+  public selectRegion(e): void {
     this.page = 1;
     this.from = 0;
     this.to = 10;
     this.currentRegion = e.target.value;
     this.regionID = this.getKey(this.regions, this.currentRegion);
-    this.sortIsActive = false;
+    this.sortIsActive = '';
     this.filteringData();
   }
 
-  public selectOrganization(e) {
+  public selectOrganization(e): void {
     this.page = 1;
     this.from = 0;
     this.to = 10;
@@ -114,16 +104,15 @@ export class AppComponent implements OnInit {
       this.organizations,
       this.currentOrganization
     );
-    this.sortIsActive = false;
+    this.sortIsActive = '';
     this.filteringData();
   }
 
-  private filteringData() {
+  private filteringData(): any {
     if (this.currentRegion === 'все' && this.currentOrganization === 'все') {
       this.currentData = this.changeData
         .filter(item => this.currentCurrency in item.currencies)
         .slice(this.from, this.to);
-
       this.totalResult = Math.ceil(this.data.length / 10);
     } else if (
       this.currentRegion === 'все' &&
@@ -162,11 +151,8 @@ export class AppComponent implements OnInit {
     }
   }
 
-  isActiveHeader(e) {
-    this.sortIsActive = e.target.innerText;
-  }
-
-  public sortCurrencyAsk(value) {
+  public sortCurrencyAsk(value, e): void {
+    this.sortIsActive = e.target.title;
     if (this.sortCurrencyAskSwitcher) {
       this.sortCurrencyAskSwitcher = false;
       this.currentData = this.changeData.sort((a, b) => {
@@ -186,7 +172,8 @@ export class AppComponent implements OnInit {
     this.filteringData();
   }
 
-  public sortCurrencyBid(value) {
+  public sortCurrencyBid(value, e): void {
+    this.sortIsActive = e.target.title;
     if (this.sortCurrencyBidSwitcher) {
       this.sortCurrencyBidSwitcher = false;
       this.currentData = this.changeData.sort((a, b) => {
@@ -206,7 +193,8 @@ export class AppComponent implements OnInit {
     this.filteringData();
   }
 
-  public sortRegions(value) {
+  public sortRegions(value, e): void {
+    this.sortIsActive = e.target.title;
     if (this.sortRegionSwitcher) {
       this.sortRegionSwitcher = false;
       this.currentData = this.changeData.sort((a, b) => {
@@ -225,7 +213,8 @@ export class AppComponent implements OnInit {
     this.filteringData();
   }
 
-  public sortOrganization(value) {
+  public sortOrganization(value, e): void {
+    this.sortIsActive = e.target.title;
     if (this.sortOrganizationSwitcher) {
       this.sortOrganizationSwitcher = false;
       this.changeData.sort((a, b) => {
@@ -247,7 +236,8 @@ export class AppComponent implements OnInit {
     this.filteringData();
   }
 
-  public sortPhone(value) {
+  public sortPhone(value, e): void {
+    this.sortIsActive = e.target.title;
     if (this.sortPhoneSwitcher) {
       this.sortPhoneSwitcher = false;
       this.changeData.sort((a, b) => {

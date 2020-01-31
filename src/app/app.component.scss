@@ -68,12 +68,13 @@ h6 {
       width: 100%;
       margin: 60px 0;
       height: 500px;
-      
+
       .empty {
         text-align: center;
         margin: auto;
         font-size: 30px;
         color: rgba(0, 0, 0, .25);
+        text-shadow: rgba(255, 255, 255, 0.5) 0px 3px 3px;
       }
 
       .table-header {
@@ -82,8 +83,11 @@ h6 {
         li {
           font-weight: bold;
           cursor: pointer;
+          
+          img {
+            width: 10px;
+          }
         }
-
       }
 
       .table-row {
@@ -114,12 +118,8 @@ h6 {
 
         .active {
           color: rgb(70, 68, 223);
-          &::after {
-            content: '';
-            // position: absolute;
-
-          }
         }
+
       }
     }
   }
