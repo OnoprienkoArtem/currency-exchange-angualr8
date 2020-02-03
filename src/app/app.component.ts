@@ -66,7 +66,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  public currenciesValue(value): object {
+  public currenciesValue(value): any {
     for (const key in value) {
       if (key === this.currentCurrency) {
         return value[key];
