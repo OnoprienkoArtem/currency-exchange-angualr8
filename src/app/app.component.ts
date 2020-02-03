@@ -162,7 +162,7 @@ export class AppComponent implements OnInit {
     if (this.sortCurrencyAskSwitcher) {
       this.sortCurrencyAskSwitcher = false;
       this.currentData = this.changeData.sort((a, b) => {
-        return this.sortAtoB(
+        return this.sortData(
           a[value][this.currentCurrency].ask,
           b[value][this.currentCurrency].ask
         );
@@ -170,9 +170,9 @@ export class AppComponent implements OnInit {
     } else {
       this.sortCurrencyAskSwitcher = true;
       this.currentData = this.changeData.sort((a, b) => {
-        return this.sortBtoA(
-          a[value][this.currentCurrency].ask,
-          b[value][this.currentCurrency].ask
+        return this.sortData(
+          b[value][this.currentCurrency].ask,
+          a[value][this.currentCurrency].ask
         );
       });
     }
@@ -184,7 +184,7 @@ export class AppComponent implements OnInit {
     if (this.sortCurrencyBidSwitcher) {
       this.sortCurrencyBidSwitcher = false;
       this.currentData = this.changeData.sort((a, b) => {
-        return this.sortAtoB(
+        return this.sortData(
           a[value][this.currentCurrency].bid,
           b[value][this.currentCurrency].bid
         );
@@ -192,9 +192,9 @@ export class AppComponent implements OnInit {
     } else {
       this.sortCurrencyBidSwitcher = true;
       this.currentData = this.changeData.sort((a, b) => {
-        return this.sortBtoA(
-          a[value][this.currentCurrency].bid,
-          b[value][this.currentCurrency].bid
+        return this.sortData(
+          b[value][this.currentCurrency].bid,
+          a[value][this.currentCurrency].bid
         );
       });
     }
@@ -206,12 +206,12 @@ export class AppComponent implements OnInit {
     if (this.sortRegionSwitcher) {
       this.sortRegionSwitcher = false;
       this.currentData = this.changeData.sort((a, b) => {
-        return this.sortAtoB(this.regions[a[value]], this.regions[b[value]]);
+        return this.sortData(this.regions[a[value]], this.regions[b[value]]);
       });
     } else {
       this.sortRegionSwitcher = true;
       this.currentData = this.changeData.sort((a, b) => {
-        return this.sortBtoA(this.regions[a[value]], this.regions[b[value]]);
+        return this.sortData(this.regions[b[value]], this.regions[a[value]]);
       });
     }
     this.filteringData();
@@ -222,12 +222,12 @@ export class AppComponent implements OnInit {
     if (this.sortOrganizationSwitcher) {
       this.sortOrganizationSwitcher = false;
       this.currentData = this.changeData.sort((a, b) => {
-        return this.sortAtoB(a[value], b[value]);
+        return this.sortData(a[value], b[value]);
       });
     } else {
       this.sortOrganizationSwitcher = true;
       this.currentData = this.changeData.sort((a, b) => {
-        return this.sortBtoA(a[value], b[value]);
+        return this.sortData(b[value], a[value]);
       });
     }
     this.filteringData();
@@ -238,12 +238,12 @@ export class AppComponent implements OnInit {
     if (this.sortPhoneSwitcher) {
       this.sortPhoneSwitcher = false;
       this.currentData = this.changeData.sort((a, b) => {
-        return this.sortAtoB(a[value], b[value]);
+        return this.sortData(a[value], b[value]);
       });
     } else {
       this.sortPhoneSwitcher = true;
       this.currentData = this.changeData.sort((a, b) => {
-        return this.sortBtoA(a[value], b[value]);
+        return this.sortData(b[value], a[value]);
       });
     }
     this.filteringData();
@@ -270,22 +270,12 @@ export class AppComponent implements OnInit {
     this.filteringData();
   }
 
-  private sortAtoB(a, b) {
+  private sortData(a, b) {
     if (a < b) {
       return -1;
     }
     if (a > b) {
       return 1;
-    }
-    return 0;
-  }
-
-  private sortBtoA(a, b) {
-    if (a < b) {
-      return 1;
-    }
-    if (a > b) {
-      return -1;
     }
     return 0;
   }
