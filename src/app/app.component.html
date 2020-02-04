@@ -2,7 +2,7 @@
   <header>
     <div class="container">
       <h1>Курс валют</h1>
-      <span class="date">{{date}}</span>
+      <span class="date">{{ date }}</span>
     </div>
   </header>
 
@@ -53,15 +53,13 @@
                 Продажа
                 <span *ngIf="sortIsActive === 'ask'">
                   <img
-                    *ngIf="!sortCurrencyAskSwitcher"
+                    *ngIf="!sortCurrencyAskSwitcher; else oppositeAsk"
                     src="assets/icon/Arrow_Download.svg"
                     alt=""
                   />
-                  <img
-                    *ngIf="sortCurrencyAskSwitcher"
-                    src="assets/icon/Arrow_Upward.svg"
-                    alt=""
-                  />
+                  <ng-template #oppositeAsk>
+                    <img src="assets/icon/Arrow_Upward.svg" alt="" />
+                  </ng-template>
                 </span>
               </li>
               <li
@@ -73,15 +71,13 @@
                 Покупка
                 <span *ngIf="sortIsActive === 'bid'">
                   <img
-                    *ngIf="!sortCurrencyBidSwitcher"
+                    *ngIf="!sortCurrencyBidSwitcher; else oppositeBid"
                     src="assets/icon/Arrow_Download.svg"
                     alt=""
                   />
-                  <img
-                    *ngIf="sortCurrencyBidSwitcher"
-                    src="assets/icon/Arrow_Upward.svg"
-                    alt=""
-                  />
+                  <ng-template #oppositeBid>
+                    <img src="assets/icon/Arrow_Upward.svg" alt="" />
+                  </ng-template>
                 </span>
               </li>
               <li
@@ -93,15 +89,13 @@
                 Город
                 <span *ngIf="sortIsActive === 'region'">
                   <img
-                    *ngIf="!sortRegionSwitcher"
+                    *ngIf="!sortRegionSwitcher; else oppositeRegion"
                     src="assets/icon/Arrow_Download.svg"
                     alt=""
                   />
-                  <img
-                    *ngIf="sortRegionSwitcher"
-                    src="assets/icon/Arrow_Upward.svg"
-                    alt=""
-                  />
+                  <ng-template #oppositeRegion>
+                    <img src="assets/icon/Arrow_Upward.svg" alt="" />
+                  </ng-template>
                 </span>
               </li>
               <li
@@ -113,15 +107,13 @@
                 Организация
                 <span *ngIf="sortIsActive === 'organization'">
                   <img
-                    *ngIf="!sortOrganizationSwitcher"
+                    *ngIf="!sortOrganizationSwitcher; else oppositeOrganization"
                     src="assets/icon/Arrow_Download.svg"
                     alt=""
                   />
-                  <img
-                    *ngIf="sortOrganizationSwitcher"
-                    src="assets/icon/Arrow_Upward.svg"
-                    alt=""
-                  />
+                  <ng-template #oppositeOrganization>
+                    <img src="assets/icon/Arrow_Upward.svg" alt="" />
+                  </ng-template>
                 </span>
               </li>
               <li
@@ -133,15 +125,13 @@
                 Телефон
                 <span *ngIf="sortIsActive === 'phone'">
                   <img
-                    *ngIf="!sortPhoneSwitcher"
+                    *ngIf="!sortPhoneSwitcher; else oppositePhone"
                     src="assets/icon/Arrow_Download.svg"
                     alt=""
                   />
-                  <img
-                    *ngIf="sortPhoneSwitcher"
-                    src="assets/icon/Arrow_Upward.svg"
-                    alt=""
-                  />
+                  <ng-template #oppositePhone>
+                    <img src="assets/icon/Arrow_Upward.svg" alt="" />
+                  </ng-template>
                 </span>
               </li>
             </ul>
