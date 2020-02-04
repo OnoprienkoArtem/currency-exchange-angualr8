@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
   public currentData = [];
   public changeData: Array<any>;
 
-  public date: any;
+  public date: Date;
 
   constructor(public appService: AppService) {}
 
@@ -44,14 +44,7 @@ export class AppComponent implements OnInit {
     this.appService.getData().subscribe((data: any) => {
       this.data = data.organizations;
 
-      const objDate = new Date(data.date);
-      this.date = `${this.checkDateOnZero(
-        objDate.getDate()
-      )}.${this.checkDateOnZero(
-        objDate.getMonth() + 1
-      )}.${objDate.getFullYear()} - ${objDate.getHours()}:${this.checkDateOnZero(
-        objDate.getMinutes()
-      )}`;
+      this.date = new Date(data.date);
 
       this.currentData = this.data
         .filter(item => this.currentCurrency in item.currencies)
@@ -77,10 +70,6 @@ export class AppComponent implements OnInit {
         return value[key];
       }
     }
-  }
-
-  private checkDateOnZero(n) {
-    return n < 10 ? '0' + n : n;
   }
 
   private getKey(object, current): string {
