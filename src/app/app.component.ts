@@ -45,8 +45,13 @@ export class AppComponent implements OnInit {
       this.data = data.organizations;
 
       const objDate = new Date(data.date);
-      this.date = `${objDate.getDate()}.${objDate.getMonth() +
-        1}.${objDate.getFullYear()} - ${objDate.getHours()}:${objDate.getMinutes()}`;
+      this.date = `${this.checkDateOnZero(
+        objDate.getDate()
+      )}.${this.checkDateOnZero(
+        objDate.getMonth() + 1
+      )}.${objDate.getFullYear()} - ${objDate.getHours()}:${this.checkDateOnZero(
+        objDate.getMinutes()
+      )}`;
 
       this.currentData = this.data
         .filter(item => this.currentCurrency in item.currencies)
@@ -72,6 +77,10 @@ export class AppComponent implements OnInit {
         return value[key];
       }
     }
+  }
+
+  private checkDateOnZero(n) {
+    return n < 10 ? '0' + n : n;
   }
 
   private getKey(object, current): string {
