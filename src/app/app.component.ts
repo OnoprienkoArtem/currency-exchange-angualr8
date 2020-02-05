@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
 
   public date: Date;
 
-  constructor(public appService: AppService) {}
+  constructor(private appService: AppService) {}
 
   ngOnInit() {
     this.appService.getData().subscribe((data: any) => {
